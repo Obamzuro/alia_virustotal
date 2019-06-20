@@ -1,8 +1,8 @@
 from http import client
 from requests import post
 import logging
-from json import dumps
-from hashlib import md5
+import json
+import hashlib
 import os
 import time
 import re
@@ -26,7 +26,7 @@ def print_debug(string, color, is_debug=None):
         print("\033[0;39;49m")
 
 def md5(file_entity):
-    hash_md5 = md5()
+    hash_md5 = hashlib.md5()
     for chunk in iter(lambda: file_entity.read(4096), b""):
         hash_md5.update(chunk)
     file_entity.seek(0)
@@ -101,7 +101,7 @@ def check_file_on_server_uploaded(filename, file_entity, file_hash, te_cookie=No
     print_debug("Query server for uploaded file", BLUE)
     params = { "request": {"md5": file_hash, "file_name": os.path.basename(filename)}}
     while 1:
-        response = post(url, data=dumps(params), headers=headers)
+        response = post(url, data=json.dumps(params), headers=headers)
         if (response.status_code == 400):
             print_debug("400 Server Response error (check extension of file)", RED)
         elif (response.status_code == 503):
