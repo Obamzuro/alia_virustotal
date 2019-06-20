@@ -12,17 +12,17 @@ RED = 0b1
 GREEN = 0b10
 BLUE = 0b100
 
-API_ID = "##############"
+API_ID = "####################"
 
 def print_debug(string, color, is_debug=None):
     if is_debug and debug_level == "y" or not is_debug:
         if (color):
             if (color & RED):
-                print("\033[1;31;40m", end="")
+                print("\033[1;31;49m", end="")
             elif (color & GREEN):
-                print("\033[1;32;40m", end="")
+                print("\033[1;32;49m", end="")
             elif (color & BLUE):
-                print("\033[1;34;40m", end="")
+                print("\033[1;34;49m", end="")
         print(string, end="")
         print("\033[0;39;49m")
 
